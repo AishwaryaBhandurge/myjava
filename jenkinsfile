@@ -1,0 +1,30 @@
+pipeline {
+    agent any 
+        stages {
+            stage ('preparation') {
+                steps {
+                    echo "pulling changes from SCM"
+                    git branch:'main',
+                    url:'https://github.com/AishwaryaBhandurge/myjava.git',
+                    credentialsId:'github'
+                    echo "preparation is success"
+                    sh 'javac Test.java'
+                    sh 'java Test'
+                }
+            }
+            stage ('build') {
+                steps {
+                        echo "build the project"
+                        sleep 2
+                        echo "done"
+                }
+            }
+            stage ('test') {
+                steps {
+                        echo "Test the project"
+                        sleep 2
+                        echo "done"
+                }
+            }
+        }
+    }
